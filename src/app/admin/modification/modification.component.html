@@ -1,0 +1,73 @@
+<div class="white-content">
+    <app-sidebar></app-sidebar>
+    <div class="wrapper">
+      <app-navbar></app-navbar>
+      <div class="main-panel">
+        <div class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card ">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-8">
+                      <h4 class="card-title"> Modifier Prêts</h4>
+                    </div>
+                    <div class="pull-left">
+                      <a class="btn btn-outline-danger" routerLink="/admin/prets" title="Go back"> <i
+                          class="fas fa-backward "></i> </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+  
+                    <form [formGroup]="editPret" (ngSubmit)="onSubmit()">
+                        <div class="row justify-content-center">
+      
+                          <div class="col-xs-12 col-sm-6 col-lg-6 form_middle pb-5">
+                            <div class="alert alert-danger text-center {{dis}}">
+                              {{errorMessage}}
+                            </div>
+                            <div class="alert alert-success text-center {{dis}}">
+                              {{successMessage}}
+                            </div>
+                            <div class="col-lg-12 margin-tb p-0">
+                              <h2>Modification de l'article:</h2>
+                            </div>
+                            <div class="col-xs-12">
+                              <div class="form-group">
+                                <strong>Titre de l'article: *</strong>
+                                <input type="text" formControlName="matricule" class="form-control">
+                              </div>
+      
+                              <div class="form-group">
+                                <strong>Apperçu de l'article *</strong>
+                                <input type="date" formControlName="date_pret" class="form-control">
+                              </div>
+      
+                              <div class="form-group">
+                                <strong>Date: *</strong>
+                                <input type="date" formControlName="date_retour" class="form-control">
+                              </div>
+      
+                              <div class="form-group">
+                                <strong>ISBN du Livre: *</strong>
+                                <input type="text" formControlName="isbn" class="form-control">
+                              </div>
+      
+                            </div>
+      
+                            <div class="col-xs-12 mt-4">
+                              <button type="submit" class="btn btn-primary btn-full-width" type="submit"
+                                [disabled]="editPret.invalid">Enregistrer</button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

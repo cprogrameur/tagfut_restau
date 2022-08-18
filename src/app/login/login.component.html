@@ -1,0 +1,24 @@
+<app-header></app-header>
+<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Clean Blog</h1>
+                    <span class="subheading">Connexion</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="mb-10 mt-10">
+           <div class="formbox col-lg-6 m-auto"> 
+               <form class="form" [formGroup]="loginForm" (ngSubmit) = "onSubmit()"> 
+                   <h2>Connexion</h2> 
+                   <input type="email" formControlName="email" id="email" class="form-control mb-2">
+                   <input type="password" formControlName="password" id="password" class="form-control">
+                   <input type="submit" value="Login" class="btn btn-primary mt-4">
+               </form>
+           </div> 
+</section>
+<app-footer></app-footer>
