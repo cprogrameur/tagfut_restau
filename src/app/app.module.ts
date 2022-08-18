@@ -21,6 +21,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
 import { MessagesComponent } from './admin/messages/messages.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { MessagesComponent } from './admin/messages/messages.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
