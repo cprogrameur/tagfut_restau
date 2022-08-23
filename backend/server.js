@@ -5,7 +5,9 @@ const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestor
 const bcrypt = require('bcrypt');
 const auth = require('./middlewares/auth');
 const multer = require('./middlewares/multer-config');
-const app = express()
+const app = express();
+const fs = require('fs');
+
 
 app.use(cors());
 app.use(express.json());
@@ -83,25 +85,50 @@ app.delete('/blog/contact/:id',auth, async (req, res) => {
 
 //Posts gestion
 //Save Posts
-app.post('/blog/post', async (req, res) => {
+app.post('/blog/post',multer, async (req, res) => {
     try {
+        console.log(req.body)
         const postJson = {
             titre: req.body.email,
             apperçu: req.body.name,
-            couverture: req.body.message,
-            blocs: req.body.blocs,
+            couverture: `${req.protocol}://${req.get('host')}/images/${req.files.couverture.filename}`,
+            blocs: [
+                {
+                    titre:req.body.bloc1.titre,
+                    contenu:req.body.bloc1.appercu,
+                    photo:`${req.protocol}://${req.get('host')}/images/${req.files.bloc1.filename}`
+                },
+                {
+                    titre:req.body.bloc2.titre,
+                    contenu:req.body.bloc2.appercu,
+                    photo:`${req.protocol}://${req.get('host')}/images/${req.files.bloc2.filename}`
+                },
+                {
+                    titre:req.body.bloc3.titre,
+                    contenu:req.body.bloc3.appercu,
+                    photo:`${req.protocol}://${req.get('host')}/images/${req.files.bloc3.filename}`
+                },
+                {
+                    titre:req.body.bloc4.titre,
+                    contenu:req.body.bloc4.appercu,
+                    photo:`${req.protocol}://${req.get('host')}/images/${req.files.bloc1.filename}`
+                }],
             categorie: req.body.categorie,
             author: req.body.author,
-            posted_at: Date.now()
+            posted_at: req.body.date
         };
-        var hash = crypto.createHash('md5').update(req.body.message).digest('hex');
-        const id =  hash+Date;
+        var hash = req.body.author;
+        const id =  hash+'_'+Date;
         const postsDb = db.collection('posts');
         const response = await postsDb.doc(id).set(postJson);
         res.send({ response: response, message: 'Post Enregistré!' });
     } catch (error) {
         res.send(error);
     }
+})
+//Post images
+app.post('/blog/images/:name',auth,multer,async(req,res)=>{
+
 })
 //Get Posts
 app.get('/blog/posts/first', async (req, res) => {
@@ -131,7 +158,7 @@ app.get('/blog/posts/:last', async (req, res) => {
 })
 
 //Delete Post
-app.delete('/blog/posts/:id',auth, async (req, res) => {
+app.delete('/blog/posts/:id',auth,multer, async (req, res) => {
     try {
         const id = req.params.id;
         const contactsDb = db.collection('posts').doc(id);
@@ -143,7 +170,7 @@ app.delete('/blog/posts/:id',auth, async (req, res) => {
 })
 
 //Update Post
-app.put('/blog/post/:id',auth,async(req,res)=>{
+app.put('/blog/post/:id',auth,multer,async(req,res)=>{
     try {
         const postJson = {
             id:req.params.id,

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormArray } from '@angular/forms';
+
 
 @Component({
   selector: 'app-creation',
@@ -21,15 +23,36 @@ export class CreationComponent implements OnInit {
               private router:Router,
               private _api:ApiService) { 
     this.registerForm = this.fb.group({
-      matricule: ['',[Validators.required,Validators.maxLength(255)]],
-      date_pret: ['',Validators.required],
-      date_retour: ['',Validators.required],
-      isbn:['',Validators.required]
-    })
+      titre: ['', Validators.required],
+      appercu: ['', Validators.required],
+      date: ['', Validators.required],
+      couverture: ['', Validators.required],
+      bloc1: this.fb.group({
+        titre: ['', Validators.required],
+        contenu: ['', Validators.required],
+        photo: ['', Validators.required],
+      }),
+      bloc2: this.fb.group({
+        titre: ['', Validators.required],
+        contenu: ['', Validators.required],
+        photo: ['', Validators.required],
+      }),
+      bloc3: this.fb.group({
+        titre: [''],
+        contenu: [''],
+        photo: [''],
+      }),
+      bloc4: this.fb.group({
+        titre: [''],
+        contenu: [''],
+        photo: [''],
+      }),
+    });
   } 
 
   onSubmit(){
     const formValue = this.registerForm.value ;
+    console.log(formValue)
       this._api.postTypeRequest(`prets`,formValue).subscribe(
         (res:any)=>{
           if(res.status){
