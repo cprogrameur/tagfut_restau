@@ -1,0 +1,58 @@
+
+<div class="row body">
+    <div class="matcover" style="padding: 1vw;border-radius:.5vw;background-color: white;
+        height: max-content;width: 90%;margin: 2vw auto;box-shadow: 0.1vw 0.1vw 0.9vw grey;
+  
+  ">
+      <div class="title text-left" style="font-size: x-large;
+          margin-bottom: 1.5vw;
+          width: max-content;
+          border-bottom: .1vw solid;">Inscrivez vous:</div>
+      <form class="col" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-outline bloc_prix">
+          <label for="nom" class="form-label">Nom du restaurant</label>
+          <input type="text" formControlName="nom" id="nom" class="form-control">
+        </div>
+        <div class="form-outline bloc_prix">
+          <label for="email" class="form-label">Adresse E-mail</label>
+          <input type="email" formControlName="email" id="email" class="form-control">
+        </div>
+        <div class="form-outline bloc_prix">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input type="password" formControlName="password" id="password" class="form-control">
+        </div>
+        <div class="form-outline bloc_prix">
+          <label for="password-conf" class="form-label">Répéter le mot de passe</label>
+          <input type="password" formControlName="password_conf" id="password-conf" class="form-control">
+        </div>
+        <div class="form-outline bloc_prix">
+          <label for="numéro" class="form-label">Votre Numéro MoMo</label>
+          <input type="text" formControlName="numero" id="numéro" class="form-control">
+        </div>
+        <div class="form-outline bloc_image">
+          <label for="nbrTable" class="form-label">Nombre de tables disponibles:</label>
+          <input type="number" formControlName="nombre_tables" id="nbrTable" class="form-control">
+        </div>
+        <div class="col-xs-12">
+          <div class="form-group">
+            <strong>Image Restaurant :</strong>
+            <input id="file" type="file" class="form-control" accept="image/*" (change)="selectFile($event)"
+            style="height: 12px;opacity: 1;">
+        </div>
+        <div *ngIf="currentFileUpload" class="progress mt-2">
+          <div class="progress-bar progress-bar-info" role="progressbar"
+            attr.aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100"
+            [ngStyle]="{ width: percentage + '%' }">
+            {{ percentage }}%
+          </div>          </div>
+        </div>
+        <div class="d-flex" style="flex-direction: row-reverse;">
+          <button class="btn btn-primary btn-block" type="submit" [disabled]="registerForm.invalid"
+            style="margin-top: 1vw; width:max-content;">S'inscrire</button>
+          <div class="bloc_2">
+            <p>Vous avez déjà un compte?<a routerLink="/login">connectez-vous</a></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

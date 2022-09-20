@@ -1,0 +1,138 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+  <app-sidebar></app-sidebar>
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+      <app-navbar></app-navbar>
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Restaurants</h1>
+        <p class="mb-4">Il s'agit ici des restaurants inscrits sur la plateforme.</p>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste des stands</h6>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="ajouterRepas" class="col" (ngSubmit)="onSubmit()">
+              <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-6 col-lg-6 form_middle pb-5">
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <strong>Nom du Repas:</strong>
+                      <input type="text" formControlName="nom" id="nom" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <strong>Type du repas:</strong>
+                      <select formControlName="type" id="type" class="form-control">
+                        <option value="entrée">Entrée</option>
+                        <option value="resistance">Résistance</option>
+                        <option value="déssert">Déssert</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <strong>Origines du repas</strong>
+                      <select formControlName="origine" id="type" class="form-control">
+                        <option value="Afrique">Africains</option>
+                        <option value="europe">Européens</option>
+                        <option value="amerique">Américains</option>
+                        <option value="asie">Asiatique</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <strong>Prix de réalisation du Repas:</strong>
+                      <input type="text" formControlName="prix_achat" id="prix" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <strong>Prix de vente du Repas:</strong>
+                      <input type="text" formControlName="prix_vente" id="prix" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <strong>Description du Repas:</strong>
+                      <textarea type="text" formControlName="description" id="prix" class="form-control" cols="30"
+                        rows="10"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <strong>Photo du Repas:</strong>
+                      <input id="file" type="file" class="form-control" accept="image/*" (change)="selectFile($event)"
+                        style="height: 12px;opacity: 1;">
+                    </div>
+                    <div *ngIf="currentFileUpload" class="progress mt-2">
+                      <div class="progress-bar progress-bar-info" role="progressbar"
+                        attr.aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100"
+                        [ngStyle]="{ width: percentage + '%' }">
+                        {{ percentage }}%
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 mt-4">
+                    <button type="submit" class="btn btn-primary btn-full-width" type="submit"
+                      [disabled]="ajouterRepas.invalid">Enregistrer</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <app-footer></app-footer>
+    <!-- End of Footer -->
+
+  </div>
+  <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" routerLink="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Teminé pour Aujourd'hui?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Sélectionnez déconnexion si vous êtes prêts à quiter le site.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Anuler</button>
+        <a class="btn btn-primary" routerLink="login.html" (click)="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>

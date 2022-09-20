@@ -4,7 +4,7 @@ import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
-})
+}) 
 export class ApiService {
   public base = 'http://localhost:4000/api/'
   constructor(private _http:HttpClient) { }

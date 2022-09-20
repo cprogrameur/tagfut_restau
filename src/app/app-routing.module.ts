@@ -1,57 +1,61 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { AdminComponent } from './admin/admin.component';
-import { CreationComponent } from './admin/creation/creation.component';
-import { ListeComponent } from './admin/liste/liste.component';
-import { ModificationComponent } from './admin/modification/modification.component';
-import { ContactComponent } from './contact/contact.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { Authguard } from './guard/auth.guard';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { PostComponent } from './post/post.component';
-import { PostsComponent } from './posts/posts.component';
+import { SignupComponent } from './signup/signup.component';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
+import { BoissonsComponent } from './boissons/boissons.component';
+import { RepasComponent } from './repas/repas.component';
+import { CommandesComponent } from './commandes/commandes.component';
+import { ModifyBoissonsComponent } from './modify-boissons/modify-boissons.component';
+import { CreateRepasComponent } from './create-repas/create-repas.component';
+import { ModifyRepasComponent } from './modify-repas/modify-repas.component';
+import { CreateBoissonsComponent } from './create-boissons/create-boissons.component';
+import { AbonnementComponent } from './abonnement/abonnement.component';
 
+const redirect = ()=> redirectUnauthorizedTo(['login'])
 const routes: Routes = [
-  {
-    path:'acceuil',component:HomeComponent
-  },
-  {
-    path:'about',component:AboutComponent
-  },
-  {
-    path:'contact',component:ContactComponent
-  },
-  {
-    path:'blog',component:PostsComponent
-  },
-  {
-    path:'post/:titre',component:PostComponent
-  },
-  {
-    path:'admin',canActivate:[Authguard],component:AdminComponent
-  },
-  {
-    path:'admin/liste',canActivate:[Authguard],component:ListeComponent
-  },
-  {
-    path:'admin/contact',canActivate:[Authguard],component:ContactComponent
-  },
-  {
-    path:'admin/create',canActivate:[Authguard],component:CreationComponent
-  },
-  {
-    path:'admin/modify',canActivate:[Authguard],component:ModificationComponent
-  },
-  {
-    path:'',redirectTo:'/acceuil',pathMatch:'full'
-  },
   {
     path:'not-found',component:FourOhFourComponent
   },
   {
     path:'login',component:LoginComponent
+  },
+  {
+    path:'signup',component:SignupComponent
+  },
+  {
+    path:'',redirectTo:'/dashboard',pathMatch:'full'
+  },
+  {
+    path:'repas',component:RepasComponent
+  },
+  {
+    path:'modifier/repas/:id/:name',component:ModifyRepasComponent
+  },
+  {
+    path:'repas/ajouter',component:CreateRepasComponent
+  },
+  // ,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirect}
+  {
+    path:'dashboard',component:DashboardComponent
+  },
+  {
+    path:'boissons',component:BoissonsComponent
+  },
+  {
+    path:'modifier/boisson/:id/:name',component:ModifyBoissonsComponent
+  },
+  {
+    path:'boisson/ajouter',component:CreateBoissonsComponent
+  },
+  {
+    path:'commandes',component:CommandesComponent
+  },
+  {
+    path:'abonnement',component:AbonnementComponent
   },
   {
     path:'**',redirectTo:'/not-found',pathMatch:'full'

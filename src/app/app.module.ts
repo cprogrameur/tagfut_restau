@@ -5,44 +5,52 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
-import { PostComponent } from './post/post.component';
-import { PostsComponent } from './posts/posts.component';
-import { AdminComponent } from './admin/admin.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CreationComponent } from './admin/creation/creation.component';
-import { ModificationComponent } from './admin/modification/modification.component';
-import { ListeComponent } from './admin/liste/liste.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { LoginComponent } from './login/login.component';
-import { MessagesComponent } from './admin/messages/messages.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { NgChartsModule } from 'ng2-charts';
+import { RepasComponent } from './repas/repas.component';
+import { BoissonsComponent } from './boissons/boissons.component';
+import { CreateRepasComponent } from './create-repas/create-repas.component';
+import { CreateBoissonsComponent } from './create-boissons/create-boissons.component';
+import { ModifyBoissonsComponent } from './modify-boissons/modify-boissons.component';
+import { ModifyRepasComponent } from './modify-repas/modify-repas.component';
+import { CommandesComponent } from './commandes/commandes.component';
+import { AbonnementComponent } from './abonnement/abonnement.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
-    AboutComponent,
-    ContactComponent,
-    PostComponent,
-    PostsComponent,
-    AdminComponent,
     FourOhFourComponent,
-    CreationComponent,
-    ModificationComponent,
-    ListeComponent,
     NavbarComponent,
     SidebarComponent,
+    DashboardComponent,
+    SignupComponent,
     LoginComponent,
-    MessagesComponent
+    RepasComponent,
+    BoissonsComponent,
+    CreateRepasComponent,
+    CreateBoissonsComponent,
+    ModifyBoissonsComponent,
+    ModifyRepasComponent,
+    CommandesComponent,
+    AbonnementComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,14 @@ import { MatTableModule } from '@angular/material/table';
     ReactiveFormsModule,
     HttpClientModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    AngularFireModule.initializeApp(environment.firebase),
+ 	  AngularFirestoreModule,
+    AngularFireAuthModule,
+    NgChartsModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../services/api.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,12 +10,16 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private _api:ApiService,private userService:AuthService,private router:Router) { }
+  constructor(private userService:AuthService,    public afAuth: AngularFireAuth,
+    private router:Router) { }
 
   ngOnInit(): void {
   }
 logout(){
-    this.userService.clearStorage();
-    this.router.navigate(['/loginadmin'])
-  }
+  this.userService.clearStorage();
+  return this.afAuth.signOut().then(() => {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
+  });
+}
 }
